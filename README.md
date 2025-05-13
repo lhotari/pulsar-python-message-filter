@@ -15,6 +15,25 @@ This Pulsar Function receives messages from an input topic, checks if each messa
 - [Download complete Apache Pulsar binary](https://pulsar.apache.org/download/) to get the `pulsar-admin` and `pulsar-client` command line tools
 - [Install `pulsarctl`](https://github.com/streamnative/pulsarctl?tab=readme-ov-file#install-pulsarctl) / [Download `pulsarctl`](https://github.com/streamnative/pulsarctl/releases)
 
+### Cloud Pulsar deployment
+
+For connecting to cloud deployments with `pulsar-client` and `pulsar-admin`, it's useful a custom `cloudenv_client.conf` file with this type of content
+
+```properties
+webServiceUrl=https://host_name
+brokerServiceUrl=pulsar+ssl://host_name:6651
+authPlugin=org.apache.pulsar.client.impl.auth.AuthenticationToken
+authParams=token:<JWT_TOKEN>
+```
+
+You can use this file by setting `PULSAR_CLIENT_CONF` environment variable to point to this file. For example:
+
+```shell
+export PULSAR_CLIENT_CONF=$PWD/cloudenv_client.conf
+```
+
+For `pulsarctl`, the configuration is different, see `pulsarctl context set --help` and `pulsarctl context use --help` for more details or [read the docs](https://github.com/streamnative/pulsarctl/blob/master/docs/en/how-to-use-context.md).
+
 ### Local Pulsar standalone
 
 Starting
