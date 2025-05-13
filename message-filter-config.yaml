@@ -1,0 +1,13 @@
+name: message-filter
+tenant: public
+namespace: default
+className: message_filter.MessageFilterFunction
+py: message_filter.py
+inputs:
+  - persistent://public/default/input-topic
+parallelism: 1
+autoAck: false
+processingGuarantees: MANUAL
+userConfig:
+  destinationTopic: "persistent://public/default/filtered-output-topic"
+  filterString: "magic"
